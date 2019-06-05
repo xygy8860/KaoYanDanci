@@ -21,11 +21,10 @@
 -dontpreverify                   # 混淆时是否做预校验
 -verbose                         # 混淆时是否记录日志
 -keepattributes *Annotation*     # 保持注解
--ignorewarning                   # 忽略警告
 -dontoptimize                    # 优化不优化输入的类文件
-
+-dontwarn
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*  # 混淆时所采用的算法
-
+  -dontwarn okio.**
 #保持哪些类不被混淆
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
@@ -64,7 +63,17 @@ public static java.lang.String TABLENAME;
 -keep class **$Properties
 
 -keep class cn.jk.kaoyandanci.model.*{ *; }
+ ### greenDAO 3
+ -keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
+ public static java.lang.String TABLENAME;
+ }
+ -keep class **$Properties
 
+ # If you do not use SQLCipher:
+ -dontwarn org.greenrobot.greendao.database.**
+ # If you do not use RxJava:
+ -dontwarn rx.**
+  
 ### greenDAO 2
 -keepclassmembers class * extends de.greenrobot.dao.AbstractDao {
 public static java.lang.String TABLENAME;
@@ -99,6 +108,6 @@ public static java.lang.String TABLENAME;
 }
 -dontwarn com.tencent.bugly.** #不混淆bugly
 -keep public class com.tencent.bugly.**{*;}
-
+-dontwarn rx.**
 -renamesourcefileattribute SourceFile # 保持行号
 -keepattributes SourceFile,LineNumberTable

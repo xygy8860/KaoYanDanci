@@ -3,9 +3,12 @@
 buildscript {
     repositories {
         jcenter()
+        google()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.tencent.bugly:symtabfileuploader:2.1.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -15,10 +18,29 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+
+        google()
+        mavenCentral()
         maven { url "https://jitpack.io" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+ext {
+    // Sdk and tools
+    compile_sdk_version = 27
+    min_sdk_version = 16
+    target_sdk_version = 27
+
+    version_code = 10
+    version_name = '2.0'
+
+    // App dependencies
+    support_version = '27.1.1'
+
+    leakcanary_version = '1.5.4'
+    gson_version = '2.8.2'
 }

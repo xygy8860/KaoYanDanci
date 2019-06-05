@@ -75,12 +75,12 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
+    public void onHiddenChanged(boolean hidden) {        //TODO 这个有啥用??
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            if (Constant.DATA_CHANGED) {
+            if (MainActivity.DATA_CHANGED) {
                 drawPi();
-                Constant.DATA_CHANGED = false;
+                MainActivity.DATA_CHANGED = false;
             }
         }
     }
